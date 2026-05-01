@@ -35,7 +35,7 @@
   
 ## Stats
 - ![Release](https://img.shields.io/github/v/release/29miaoet/wordle)
-- ![License](https://img.shields.io/badge/license-none-green)
+- ![License](https://img.shields.io/badge/license-MIT-green)
 - ![Repo size](https://img.shields.io/github/repo-size/29miaoet/wordle)
 - ![Last commit](https://img.shields.io/github/last-commit/29miaoet/wordle)
 - ![Language count](https://img.shields.io/github/languages/count/29miaoet/wordle)
