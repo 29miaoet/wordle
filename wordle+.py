@@ -184,9 +184,7 @@ def play_wordle(rlword):
     
 
 
-#This part was written by ChatGPT, so do not blame me if it fails.
-#And... It fails, of course it does.
-#MUST FIX LATER
+# Web Scraper
 #==================================================================================#
 def get_wordle_answer(target_date=None):
 
