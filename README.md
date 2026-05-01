@@ -30,6 +30,13 @@
 - Internet connectivity
 - Interactive Python shell
 
+## Install
+- Linux/macOS
+  - `curl -O https://github.com/29miaoet/wordle/blob/main/wordle%2B.py | python3`
+- Windows
+  - `curl -O https://github.com/29miaoet/wordle/blob/main/wordle%2B.py | python`
+  - Or download [wordle+.exe](https://github.com/29miaoet/wordle/blob/main/wordle%2B.exe) and double-click to run
+
 ## Notes
 - Future releases will add GUI, features, and optimizations.
   
