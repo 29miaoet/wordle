@@ -32,6 +32,10 @@
 
 ## Notes
 - Future releases will add GUI, features, and optimizations.
+
+## Download
+- [Source Code - Zip Archive](https://github.com/29miaoet/wordle/archive/refs/tags/v0.0.1.zip)
+- [Source Code - Tarball Archive](https://github.com/29miaoet/wordle/archive/refs/tags/v0.0.1.tar.gz)
   
 ## Stats
 - ![Release](https://img.shields.io/github/v/release/29miaoet/wordle)
