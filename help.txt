@@ -1,0 +1,19 @@
+Version 1.0 of the Shell Wordle Game
+
+Read this first:
+
+This is a small project designed to simulate an actual wordle game, all in your terminal. It reads off of valid words, and can even scrape the current NY Times wordle for you to play! It has not been fully tested yet, so expect some errors. If you do find any bugs, please report them, it would be very helpful.
+
+
+Notes for the developer:
+
+This script uses "Beautiful Soup" and "requests" to scrape the web, if you are running this as a raw script, please make sure you have the require modules installed, if you do not wish to install them, just remove the import lines, all the other options will still function. 
+
+
+Here are some things you should know before you start:
+
+1. Commands are not case sensitive.
+2. Type "/quit" in the wordle to quit.
+3. Type CTRL+C anytime to quit.
+
+That's all, have fun!
