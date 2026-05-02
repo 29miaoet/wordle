@@ -269,6 +269,8 @@ def choose_mode():
 
 #This function prompts the user to choose a method of playing wordle.
 class choose_wordle:
+    def __init__(self):
+        self.standardfont = ("TkDefaultFont", "14")
     def gen_rand(self):
         def get_input():
             number = entrybox.get()
@@ -285,17 +287,45 @@ class choose_wordle:
 
         menu.destroy()
         entry = tk.Tk()
-        entry.grid_rowconfigure(0, weight=1)
+        entry.grid_rowconfigure([0,1,2], weight=1)
         entry.grid_columnconfigure(0, weight=1)
-        label = tk.Label(entry, text="Pick a word length")
-        entrybox = tk.Entry(entry)
-        enter_button = tk.Button(entry, text="Enter", command=get_input)
+        label = tk.Label(entry, text="Pick a word length", font=self.standardfont)
+        entrybox = tk.Entry(entry, font=self.standardfont)
+        enter_button = tk.Button(entry, text="Enter", command=get_input, font=self.standardfont)
         label.grid(row=0, column=0, sticky="nsew")
         entrybox.grid(row=1, column=0, padx=5, pady=5, sticky="nsew")
         enter_button.grid(row=2, column=0, padx=5, pady=5, sticky="nsew")
+    def make_wordle(self):
+        def get_input_and_validate():
+            word = your_word.get()
+            try:
+                if not word.isalpha():
+                    messagebox.showwarning("Invalid Word", "Please enter letters only!")
+                elif not is_in(word, word_cache):
+                    messagebox.showwarning("Invalid Word", "Not a valid word!")
+                else:
+                    play_wordle(word)
+            except ValueError:
+                messagebox.showwarning("Invalid Word!", "Unsupported format!")
+
+
+        menu.destroy()
+        prompt = tk.Tk()
+        prompt.grid_rowconfigure([0,1,2], weight=1)
+        prompt.grid_columnconfigure(0, weight=1)
+ 
+        label = tk.Label(prompt, text="Enter your word", font=self.standardfont)
+        your_word = tk.Entry(prompt, font=self.standardfont)
+        enter_button = tk.Button(prompt, text="Enter", command=get_input_and_validate, font=self.standardfont)
+        label.grid(row=0, column=0, sticky="nsew")
+        your_word.grid(row=1, column=0, padx=5, pady=5, sticky="nsew")
+        enter_button.grid(row=2, column=0, padx=5, pady=5, sticky="nsew")
+
+
+
 
         
-test = choose_wordle()
+menuredirect = choose_wordle()
 #word = choose_wordle()
 #choose_mode()
 #print(f"You have {max_guesses[len(word)]} guesses.")
@@ -307,8 +337,8 @@ menu = tk.Tk()
 menu.grid_rowconfigure([0,1,2,3,4,5], weight=1)
 menu.grid_columnconfigure(0, weight=1)
 
-gen_random = tk.Button(menu, text="Generate a random word", command=test.gen_rand)
-make_wordle = tk.Button(menu, text="Make your own wordle")
+gen_random = tk.Button(menu, text="Generate a random word", command=menuredirect.gen_rand)
+make_wordle = tk.Button(menu, text="Make your own wordle", command=menuredirect.make_wordle)
 real_wordle = tk.Button(menu, text="Play the NY Times wordle")
 how2play = tk.Button(menu, text="How to play")
 settings = tk.Button(menu, text="Settings")
