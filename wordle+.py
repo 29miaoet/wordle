@@ -1,7 +1,9 @@
-#getpass, json, re, datetime, pydoc, signal, and sys are all built-in modules.
+#tkinter, getpass, json, re, datetime, pydoc, signal, and sys are all built-in modules.
 #You will have to install requests and bs4 if you are running the raw code.
 
 #Included with python
+import tkinter as tk
+from tkinter import messagebox
 from getpass import getpass
 import json
 import re
@@ -26,7 +28,7 @@ def handle_ctrl_c(signum, frame):
 signal.signal(signal.SIGINT, handle_ctrl_c)
 alphabet = [chr(x) for x in range(97,123)]
 word_cache = "words_alpha.txt"
-word_pick_list = "common_words.txt"
+word_pick_list = "words_alpha.txt"
 help_page = "help.txt"
 settings = "settings.ndjson"
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -266,72 +268,94 @@ def choose_mode():
 
 
 #This function prompts the user to choose a method of playing wordle.
-def choose_wordle():
-
-    
-    while True:
-        print("\n\033[44m~~~~~~~~~Wordle Game~~~~~~~~~\033[0m")
-        print("Generate a random word.   -(1)")
-        print("Make your own wordle.     -(2)")
-        print("Play NY Times wordle.     -(3)")
-        print("How to play.              -(4)")
-        print("Settings.                 -(5)")
-        print("Quit the program.         -(6)")
-        
-        choice = input("\nSelect an option to continue: ")
-        
-        if choice == "1":
-            while True:
-                wlen = input("Enter word length(1-25)(27-29)(31)(random): ")
-                try:
-                    if wlen.lower() == "random":
-                        wlen = None
-                        break
-                    elif int(wlen) in valid_wlen:
-                        break
-                    else:
-                        print("\033[31mInvalid number!\033[0m")
-                        continue
-                except ValueError:
-                    print("\033[31mUnsupported input!\033[0m")
-
-            word = pick_random_word(word_pick_list,wlen)
-            print("Length is: ", len(word))
-            return word
-        if choice == "2":
-            word = getpass("Enter the word: ").lower()
-            if is_valid(word,len(word)):
-                print("\033[32mWord OK\033[0m")
-                print("Length is ", len(word))
-                return word
-        if choice == "3":
+class choose_wordle:
+    def __init__(self):
+        self.standardfont = ("TkDefaultFont", "14")
+    def gen_rand(self):
+        def get_input():
+            number = entrybox.get()
             try:
-                word = get_wordle_answer().strip().lower()
-                return word
-            except:
-                print("\033[31mSorry, something went wrong.\033[0m")
-                choice = ""
-                continue
-                
-        if choice == "4":
-            with open(help_page, "r") as f:
-                content = f.read()
-            pydoc.pager(content)
-            choice = ""
-            continue
-        if choice == "5":
-            choose_mode()
-            choice = ""
-            continue
-        if choice == "6":
-            sys.exit()
-
-        print("\033[31mInvalid input, please try again.\033[0m")
+                number = int(number)
+                if not 0 < number < 31:
+                    number = None
+            except ValueError:
+                number = None
+            word = pick_random_word(word_pick_list, number)
+            play_wordle(word)
+            entry.mainloop()
 
 
+        menu.destroy()
+        entry = tk.Tk()
+        entry.grid_rowconfigure([0,1,2], weight=1)
+        entry.grid_columnconfigure(0, weight=1)
+        label = tk.Label(entry, text="Pick a word length", font=self.standardfont)
+        entrybox = tk.Entry(entry, font=self.standardfont)
+        enter_button = tk.Button(entry, text="Enter", command=get_input, font=self.standardfont)
+        label.grid(row=0, column=0, sticky="nsew")
+        entrybox.grid(row=1, column=0, padx=5, pady=5, sticky="nsew")
+        enter_button.grid(row=2, column=0, padx=5, pady=5, sticky="nsew")
+    def make_wordle(self):
+        def get_input_and_validate():
+            word = your_word.get()
+            try:
+                if not word.isalpha():
+                    messagebox.showwarning("Invalid Word", "Please enter letters only!")
+                elif not is_in(word, word_cache):
+                    messagebox.showwarning("Invalid Word", "Not a valid word!")
+                else:
+                    play_wordle(word)
+            except ValueError:
+                messagebox.showwarning("Invalid Word!", "Unsupported format!")
 
-word = choose_wordle()
+
+        menu.destroy()
+        prompt = tk.Tk()
+        prompt.grid_rowconfigure([0,1,2], weight=1)
+        prompt.grid_columnconfigure(0, weight=1)
+ 
+        label = tk.Label(prompt, text="Enter your word", font=self.standardfont)
+        your_word = tk.Entry(prompt, font=self.standardfont)
+        enter_button = tk.Button(prompt, text="Enter", command=get_input_and_validate, font=self.standardfont)
+        label.grid(row=0, column=0, sticky="nsew")
+        your_word.grid(row=1, column=0, padx=5, pady=5, sticky="nsew")
+        enter_button.grid(row=2, column=0, padx=5, pady=5, sticky="nsew")
+
+
+
+
+        
+menuredirect = choose_wordle()
+#word = choose_wordle()
 #choose_mode()
-print(f"You have {max_guesses[len(word)]} guesses.")
-play_wordle(word)
+#print(f"You have {max_guesses[len(word)]} guesses.")
+#play_wordle(word)
+button_font = ("Segoe UI", "14")
+name_font = ("Segoe UI", "18", "bold")
+
+menu = tk.Tk()
+menu.grid_rowconfigure([0,1,2,3,4,5], weight=1)
+menu.grid_columnconfigure(0, weight=1)
+
+gen_random = tk.Button(menu, text="Generate a random word", command=menuredirect.gen_rand)
+make_wordle = tk.Button(menu, text="Make your own wordle", command=menuredirect.make_wordle)
+real_wordle = tk.Button(menu, text="Play the NY Times wordle")
+how2play = tk.Button(menu, text="How to play")
+settings = tk.Button(menu, text="Settings")
+qt = tk.Button(menu, text="Quit the program")
+name = tk.Label(menu, text="Wordle", font=name_font)
+
+name.grid(row=0, column=0, sticky="nsew")
+i = 1
+for item in (gen_random, make_wordle, real_wordle, how2play, settings, qt):
+    item.config(font=button_font)
+    item.grid(row=i, column=0, sticky="nsew", padx=10)
+    i += 1
+
+menu.mainloop()
+
+
+
+
+
 
