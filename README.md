@@ -68,5 +68,5 @@
 **✓** [Vim](https://www.vim.org/)  
 **✓** [Neovim](https://neovim.io/)  
 
-*<p align="center"><sub>©2026 – No Rights Reserved</sub></p>*
+*<p align="center"><sub>©2026 – Almost No Rights Reserved</sub></p>*
 
