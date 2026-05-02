@@ -1,7 +1,8 @@
-#getpass, json, re, datetime, pydoc, signal, and sys are all built-in modules.
+#tkinter, getpass, json, re, datetime, pydoc, signal, and sys are all built-in modules.
 #You will have to install requests and bs4 if you are running the raw code.
 
 #Included with python
+import tkinter as tk
 from getpass import getpass
 import json
 import re
@@ -26,7 +27,7 @@ def handle_ctrl_c(signum, frame):
 signal.signal(signal.SIGINT, handle_ctrl_c)
 alphabet = [chr(x) for x in range(97,123)]
 word_cache = "words_alpha.txt"
-word_pick_list = "common_words.txt"
+word_pick_list = "words_alpha.txt"
 help_page = "help.txt"
 settings = "settings.ndjson"
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -330,8 +331,31 @@ def choose_wordle():
 
 
 
-word = choose_wordle()
+#word = choose_wordle()
 #choose_mode()
-print(f"You have {max_guesses[len(word)]} guesses.")
-play_wordle(word)
+#print(f"You have {max_guesses[len(word)]} guesses.")
+#play_wordle(word)
+
+menu = tk.Tk()
+menu.grid_rowconfigure([0,1,2,3,4,5], weight=1)
+menu.grid_columnconfigure(0, weight=1)
+
+gen_random = tk.Button(menu, text="Generate a random word")
+make_wordle = tk.Button(menu, text="Make your own wordle")
+real_wordle = tk.Button(menu, text="Play the NY Times wordle")
+how2play = tk.Button(menu, text="How to play")
+settings = tk.Button(menu, text="Settings")
+qt = tk.Button(menu, text="Quit the program")
+
+i = 0
+for item in (gen_random, make_wordle, real_wordle, how2play, settings, qt):
+    item.grid(row=i, column=0)
+    i += 1
+
+menu.mainloop()
+
+
+
+
+
 
