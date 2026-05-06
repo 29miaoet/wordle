@@ -39,11 +39,11 @@ cd wordle
 rm wordle+.exe LICENSE README.md
 python3 wordle+.py
 ```
-Install for Windows:
+Install for Windows(Powershell):
 ```
 git clone https://github.com/29miaoet/wordle.git
-cd wordle
-rm LICENSE README.md wordle+.py settings.ndjson help.txt common_words.txt words_alpha.txt wordle+.py
+set-location wordle
+remove-item LICENSE, README.md, wordle+.py, settings.ndjson, help.txt, common_words.txt, words_alpha.txt, wordle+.py
 ./wordle+.exe
 ```
 
