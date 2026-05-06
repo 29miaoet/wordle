@@ -30,6 +30,24 @@
 - Internet connectivity
 - Interactive Python shell
 
+## Install
+
+Install for macOS and Linux:
+```
+git clone https://github.com/29miaoet/wordle.git
+cd wordle
+rm wordle+.exe LICENSE README.md
+python3 wordle+.py
+```
+Install for Windows:
+```
+git clone https://github.com/29miaoet/wordle.git
+cd wordle
+rm LICENSE README.md wordle+.py settings.ndjson help.txt common_words.txt words_alpha.txt wordle+.py
+./wordle+.exe
+```
+
+
 ## Notes
 - Future releases will add GUI, features, and optimizations.
 
